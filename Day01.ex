@@ -25,7 +25,7 @@ defmodule Day01 do
     |> Enum.map(&parseLine(&1))
   end
 
-  def day01Part1 do
+  def part1 do
     readInput()
     |> parseInput()
     |> Enum.sum()
@@ -83,15 +83,15 @@ defmodule Day01 do
     |> Enum.map(&parseLine(&1))
   end
 
-  def day01Part2 do
+  def part2 do
     readInput()
     |> parseInput2()
     |> Enum.sum()
   end
 end
 
-Day01.day01Part1()
+Day01.part1()
 |> IO.puts()
 
-Day01.day01Part2()
+Day01.part2()
 |> IO.puts()
