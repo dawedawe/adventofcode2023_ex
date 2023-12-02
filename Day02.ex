@@ -70,7 +70,32 @@ defmodule Day02 do
     |> Enum.filter(&isValidGame/1)
     |> List.foldl(0, fn x, acc -> acc + elem(x, 0) end)
   end
+
+  def power_of_game(game) do
+    roundsMaxed =
+      game
+      |> elem(1)
+      |> Enum.reduce(fn e, acc ->
+        Map.merge(e, acc, fn _key, val1, val2 -> max(val1, val2) end)
+      end)
+
+    [
+      roundsMaxed |> Map.get("red", 0),
+      roundsMaxed |> Map.get("green", 0),
+      roundsMaxed |> Map.get("blue", 0)
+    ]
+    |> Enum.product()
+  end
+
+  def part2() do
+    parse()
+    |> Enum.map(&power_of_game/1)
+    |> Enum.sum()
+  end
 end
 
 Day02.part1()
+|> IO.puts()
+
+Day02.part2()
 |> IO.puts()
