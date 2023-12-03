@@ -1,0 +1,1 @@
+crappy AoC solutions to learn the language
