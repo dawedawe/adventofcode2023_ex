@@ -85,7 +85,30 @@ defmodule Day05 do
     |> Enum.map(fn seed -> location_for_seed(seed, maps) end)
     |> Enum.min()
   end
+
+  def process_range(acc, maps, i, upper_bound) when i <= upper_bound do
+    loc = location_for_seed(i, maps)
+    acc_new = min(acc, loc)
+    process_range(acc_new, maps, i + 1, upper_bound)
+  end
+
+  def process_range(acc, _maps, _i, _upper_bound), do: acc
+
+  def part2() do
+    {seeds, maps} = parse()
+
+    ranges =
+      seeds
+      |> Enum.chunk_every(2)
+
+    ranges
+    |> Enum.map(fn [start, lng] -> process_range([], maps, start, start + lng - 1) end)
+    |> Enum.min()
+  end
 end
 
 Day05.part1()
+|> IO.puts()
+
+Day05.part2()
 |> IO.puts()
