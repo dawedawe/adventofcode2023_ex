@@ -1,14 +1,5 @@
 defmodule Day04 do
-  def input_file() do
-    "Day04Input.txt"
-  end
-
-  def read_input() do
-    case File.read(input_file()) do
-      {:ok, content} -> content
-      {:error, reason} -> raise reason
-    end
-  end
+  def input_file(), do: "priv/Day04Input.txt"
 
   def parse_line(line) do
     [card_part, winning_part, have_part] = String.split(line, [":", "|"])
@@ -39,7 +30,7 @@ defmodule Day04 do
   end
 
   def parse() do
-    read_input()
+    File.read!(input_file())
     |> parse_input()
     |> Enum.map(&parse_line/1)
   end

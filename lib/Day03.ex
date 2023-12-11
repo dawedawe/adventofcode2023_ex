@@ -1,14 +1,5 @@
 defmodule Day03 do
-  def input_file() do
-    "Day03Input.txt"
-  end
-
-  def read_input() do
-    case File.read(input_file()) do
-      {:ok, content} -> content
-      {:error, reason} -> raise reason
-    end
-  end
+  def input_file(), do: "priv/Day03Input.txt"
 
   defmodule Serial do
     defstruct nr: -1, len: -1, x_pos: -1, y_pos: -1
@@ -78,7 +69,7 @@ defmodule Day03 do
   end
 
   def parse() do
-    read_input()
+    File.read!(input_file())
     |> parse_input()
   end
 

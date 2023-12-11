@@ -1,14 +1,5 @@
 defmodule Day01 do
-  def inputFile() do
-    "Day01Input.txt"
-  end
-
-  def readInput() do
-    case File.read(inputFile()) do
-      {:ok, content} -> content
-      {:error, reason} -> raise reason
-    end
-  end
+  def inputFile(), do: "priv/Day01Input.txt"
 
   def parseLine(s) do
     s
@@ -26,7 +17,7 @@ defmodule Day01 do
   end
 
   def part1 do
-    readInput()
+    File.read!(inputFile())
     |> parseInput()
     |> Enum.sum()
   end
@@ -84,7 +75,7 @@ defmodule Day01 do
   end
 
   def part2 do
-    readInput()
+    File.read!(inputFile())
     |> parseInput2()
     |> Enum.sum()
   end

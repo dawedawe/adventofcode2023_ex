@@ -1,14 +1,5 @@
 defmodule Day05 do
-  def input_file() do
-    "Day05Input.txt"
-  end
-
-  def read_input() do
-    case File.read(input_file()) do
-      {:ok, content} -> content
-      {:error, reason} -> raise reason
-    end
-  end
+  def input_file(), do: "priv/Day05Input.txt"
 
   def parse_map_line(line) do
     Regex.scan(~r/\d+/, line)
@@ -59,7 +50,6 @@ defmodule Day05 do
     |> target_for(m7)
   end
 
-  @spec parse_input(String.t()) :: [String.t()]
   def parse_input(s) do
     lines = s |> String.split(["\n", "\r\n"], trim: false)
 
@@ -74,7 +64,7 @@ defmodule Day05 do
   end
 
   def parse() do
-    read_input()
+    File.read!(input_file())
     |> parse_input()
   end
 
@@ -97,11 +87,8 @@ defmodule Day05 do
   def part2() do
     {seeds, maps} = parse()
 
-    ranges =
-      seeds
-      |> Enum.chunk_every(2)
-
-    ranges
+    seeds
+    |> Enum.chunk_every(2)
     |> Enum.map(fn [start, lng] -> process_range([], maps, start, start + lng - 1) end)
     |> Enum.min()
   end

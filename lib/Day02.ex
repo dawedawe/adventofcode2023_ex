@@ -1,7 +1,5 @@
 defmodule Day02 do
-  def inputFile() do
-    "Day02Input.txt"
-  end
+  def inputFile(), do: "priv/Day02Input.txt"
 
   def maxPossible() do
     %{"red" => 12, "green" => 13, "blue" => 14}
@@ -17,13 +15,6 @@ defmodule Day02 do
     maxBlue = Map.get(maxPossible(), "blue")
 
     red <= maxRed && green <= maxGreen && blue <= maxBlue
-  end
-
-  def readInput() do
-    case File.read(inputFile()) do
-      {:ok, content} -> content
-      {:error, reason} -> raise reason
-    end
   end
 
   def isValidGame(game) do
@@ -61,7 +52,7 @@ defmodule Day02 do
   end
 
   def parse() do
-    readInput()
+    File.read!(inputFile())
     |> parseInput()
   end
 
