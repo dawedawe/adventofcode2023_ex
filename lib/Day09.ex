@@ -27,7 +27,7 @@ defmodule Day09 do
 
   def calc_history(history) do
     last_diffs = List.last(history)
-    all_zero = Enum.count(last_diffs, & &1 != 0) == 0
+    all_zero = Enum.count(last_diffs, &(&1 != 0)) == 0
 
     if all_zero do
       history
@@ -51,7 +51,24 @@ defmodule Day09 do
     |> Enum.map(fn line -> calc_extrapolated([line]) end)
     |> Enum.sum()
   end
+
+  def calc_extrapolated_part2(numbers) do
+    history = calc_history(numbers) |> Enum.reverse()
+
+    List.foldl(history, 0, fn elem, acc ->
+      List.first(elem) - acc
+    end)
+  end
+
+  def part2() do
+    parse()
+    |> Enum.map(fn line -> calc_extrapolated_part2([line]) end)
+    |> Enum.sum()
+  end
 end
 
 Day09.part1()
+|> IO.inspect()
+
+Day09.part2()
 |> IO.inspect()
